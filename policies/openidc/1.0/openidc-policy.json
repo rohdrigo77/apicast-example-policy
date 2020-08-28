@@ -1,0 +1,17 @@
+{
+  "$schema": "http://apicast.io/policy-v1/schema#manifest#",
+  "name": "lua-resty-openidc For NGINX",
+  "summary": "Custom policy to integrate SPAs to 3scale API manager. NGINX OIDC module added.",
+  "description":
+    ["When used as an OpenID Connect Relying Party it authenticates users against",
+	 "an OpenID Connect Provider using OpenID Connect Discovery and the Basic Client Profile (i.e. the Authorization Code flow).",
+	 "When used as an OAuth 2.0 Resource Server it can validate OAuth 2.0 Bearer Access Tokens against an",
+	 "Authorization Server or, in case a JSON Web Token is used for an Access Token, verification can happen against a pre-configured secret/key.",
+     "It maintains sessions for authenticated users by leveraging lua-resty-session thus offering a configurable choice between storing",
+	 "the session state in a client-side browser cookie or use in of the server-side storage mechanisms shared-memory|memcache|redis."],
+  "version": "1.0",
+  "configuration": {
+    "type": "object",
+    "properties": { }
+  }
+}
