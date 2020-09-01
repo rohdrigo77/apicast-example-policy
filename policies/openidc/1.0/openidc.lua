@@ -49,7 +49,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --]]
 local policy = require('apicast.policy')
 local _M = policy.new('OIDC NGINX Module')
-local new = _M.new
+
 local require = require
 local cjson = require("cjson")
 local cjson_s = require("cjson.safe")
@@ -68,6 +68,8 @@ local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
 
+local new = _M.new
+
 function _M.new(config)
   local self = new(config)
 
@@ -75,8 +77,8 @@ function _M.new(config)
   
   self.discovery = config.discovery
   self.client_id = config.client_id
-  client_secret = config.client_secret
-  pass_cookies = config.pass_cookies
+  self.client_secret = config.client_secret
+  self.pass_cookies = config.pass_cookies
   
 
   return self
