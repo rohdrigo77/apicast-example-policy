@@ -47,7 +47,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @Author: Hans Zandbelt - hans.zandbelt@zmartzone.eu
 --]]
-
+local policy = require('apicast.policy')
+local _M = policy.new('OIDC NGINX Module')
+local new = _M.new
 local require = require
 local cjson = require("cjson")
 local cjson_s = require("cjson.safe")
@@ -65,6 +67,20 @@ local log = ngx.log
 local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
+
+function _M.new(config)
+  local self = new(config)
+
+  local redirect_uri_path = config.redirect_uri_path
+  
+  self.discovery = config.discovery
+  self.client_id = config.client_id
+  client_secret = config.client_secret
+  pass_cookies = config.pass_cookies
+  
+
+  return self
+end
 
 local function token_auth_method_precondition(method, required_field)
   return function(opts)
