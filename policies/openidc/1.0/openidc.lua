@@ -48,8 +48,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @Author: Hans Zandbelt - hans.zandbelt@zmartzone.eu
 --]]
 local policy = require('apicast.policy')
-local _M = policy.new('OIDC NGINX Module')
-
 local require = require
 local cjson = require("cjson")
 local cjson_s = require("cjson.safe")
@@ -68,6 +66,8 @@ local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
 -- local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+
+local _M = policy.new('OIDC NGINX Module')
 local new = _M.new
 
 -- function _M:init()
@@ -93,6 +93,8 @@ function _M.new(config)
   return self
 end
 
+return _M
+
 local function token_auth_method_precondition(method, required_field)
   return function(opts)
     if not opts[required_field] then
@@ -110,7 +112,7 @@ local supported_token_auth_methods = {
   client_secret_jwt = token_auth_method_precondition('client_secret_jwt', 'client_secret')
 }
 
-return _M
+
 
 local openidc = {
   _VERSION = "1.7.2"
