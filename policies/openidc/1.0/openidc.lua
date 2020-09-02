@@ -48,7 +48,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @Author: Hans Zandbelt - hans.zandbelt@zmartzone.eu
 --]]
 local policy = require('apicast.policy')
--- local _M = policy.new('OIDC NGINX Module')
+local _M = policy.new('OIDC NGINX Module')
 
 local require = require
 local cjson = require("cjson")
@@ -67,16 +67,16 @@ local log = ngx.log
 local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
-local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+-- local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
 local new = _M.new
 
-function _M:init()
+-- function _M:init()
   -- do work when nginx master process starts
-end
+-- end
 
-function _M:init_worker()
+-- function _M:init_worker()
   -- do work when nginx worker process is forked from master
-end
+-- end
 
 
 function _M.new(config)
@@ -1769,3 +1769,5 @@ function openidc.set_logging(new_log, new_levels)
 end
 
 return openidc
+
+return _M
