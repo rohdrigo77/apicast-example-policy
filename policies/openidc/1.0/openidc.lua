@@ -70,6 +70,14 @@ local WARN = ngx.WARN
 
 local new = _M.new
 
+function _M:init()
+  -- do work when nginx master process starts
+end
+
+function _M:init_worker()
+  -- do work when nginx worker process is forked from master
+end
+
 function _M.new(config)
   local self = new(config)
 
