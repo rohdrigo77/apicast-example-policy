@@ -48,7 +48,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @Author: Hans Zandbelt - hans.zandbelt@zmartzone.eu
 --]]
 local policy = require('apicast.policy')
-local _M = policy.new('OIDC NGINX Module')
+-- local _M = policy.new('OIDC NGINX Module')
 
 local require = require
 local cjson = require("cjson")
@@ -69,6 +69,15 @@ local ERROR = ngx.ERR
 local WARN = ngx.WARN
 
 local new = _M.new
+
+local setmetatable = setmetatable
+
+local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+local mt = { __index = _M }
+
+function _M.new()
+  return setmetatable({}, mt)
+end
 
 function _M:init()
   -- do work when nginx master process starts
