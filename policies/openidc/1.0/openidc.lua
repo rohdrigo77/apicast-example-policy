@@ -110,6 +110,8 @@ local supported_token_auth_methods = {
   client_secret_jwt = token_auth_method_precondition('client_secret_jwt', 'client_secret')
 }
 
+return _M
+
 local openidc = {
   _VERSION = "1.7.2"
 }
@@ -1770,4 +1772,4 @@ end
 
 return openidc
 
-return _M
+
