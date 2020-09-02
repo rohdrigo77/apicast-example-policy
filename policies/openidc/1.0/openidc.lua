@@ -67,12 +67,12 @@ local log = ngx.log
 local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
-
+local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
 local new = _M.new
 
 local setmetatable = setmetatable
 
-local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+
 local mt = { __index = _M }
 
 function _M.new()
