@@ -93,7 +93,7 @@ function _M.new(config)
   return self
 end
 
-return _M
+-- return _M
 
 local function token_auth_method_precondition(method, required_field)
   return function(opts)
