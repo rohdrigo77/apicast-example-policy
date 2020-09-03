@@ -65,27 +65,13 @@ local ERROR = ngx.ERR
 local WARN = ngx.WARN
 
 local policy = require('apicast.policy')
-local openidc = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+
+local openidc = policy.new('OIDC NGINX Module', '1.0')
 -- local setmetatable = setmetatable
 -- local mt = { __index = openidc }
 openidc.__index = openidc
 
-function openidc.new(config)
---  return setmetatable({}, mt)
--- end
 
-  local self = openidc.new(config)
-
-  local redirect_uri_path = config.redirect_uri_path
-  
-  self.discovery = config.discovery
-  self.client_id = config.client_id
-  self.client_secret = config.client_secret
-  self.pass_cookies = config.pass_cookies
-  
-
-  return self
-end
 
 
 function openidc:init()
@@ -127,6 +113,23 @@ end
 
 function openidc:balancer()
   -- use for example require('resty.balancer.round_robin').call to do load balancing
+end
+
+function openidc.new(config)
+--  return setmetatable({}, mt)
+-- end
+
+  local self = openidc.new(config)
+
+  local redirect_uri_path = config.redirect_uri_path
+  
+  self.discovery = config.discovery
+  self.client_id = config.client_id
+  self.client_secret = config.client_secret
+  self.pass_cookies = config.pass_cookies
+  
+
+  return self
 end
 
 
