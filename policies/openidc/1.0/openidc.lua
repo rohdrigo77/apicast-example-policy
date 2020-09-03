@@ -65,6 +65,9 @@ local log = ngx.log
 local DEBUG = ngx.DEBUG
 local ERROR = ngx.ERR
 local WARN = ngx.WARN
+
+local policy = require('apicast.policy')
+
 -- local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
 
 -- local _M = policy.new('OIDC NGINX Module')
