@@ -47,7 +47,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @Author: Hans Zandbelt - hans.zandbelt@zmartzone.eu
 --]]
-local policy = require('apicast.policy')
+-- local policy = require('apicast.policy')
 local require = require
 local cjson = require("cjson")
 local cjson_s = require("cjson.safe")
@@ -67,8 +67,8 @@ local ERROR = ngx.ERR
 local WARN = ngx.WARN
 -- local _M = require('apicast.policy').new('OIDC NGINX Module', '1.0')
 
-local _M = policy.new('OIDC NGINX Module')
-local new = _M.new
+-- local _M = policy.new('OIDC NGINX Module')
+-- local new = _M.new
 
 -- function _M:init()
   -- do work when nginx master process starts
@@ -77,10 +77,61 @@ local new = _M.new
 -- function _M:init_worker()
   -- do work when nginx worker process is forked from master
 -- end
+openidc.__index = openidc
 
 
-function _M.new(config)
-  local self = new(config)
+local setmetatable = setmetatable
+
+local openidc = require('apicast.policy').new('OIDC NGINX Module', '1.0')
+local mt = { __index = openidc }
+
+function openidc:init()
+  -- do work when nginx master process starts
+end
+
+function openidc:init_worker()
+  -- do work when nginx worker process is forked from master
+end
+
+function openidc:rewrite()
+  -- change the request before it reaches upstream
+end
+
+function openidc:access()
+  -- ability to deny the request before it is sent upstream
+end
+
+function openidc:content()
+  -- can create content instead of connecting to upstream
+end
+
+function openidc:post_action()
+  -- do something after the response was sent to the client
+end
+
+function openidc:header_filter()
+  -- can change response headers
+end
+
+function openidc:body_filter()
+  -- can read and change response body
+  -- https://github.com/openresty/lua-nginx-module/blob/master/README.markdown#body_filter_by_lua
+end
+
+function openidc:log()
+  -- can do extra logging
+end
+
+function openidc:balancer()
+  -- use for example require('resty.balancer.round_robin').call to do load balancing
+end
+
+
+function openidc.new(config)
+  return setmetatable({}, mt)
+end
+
+  local self = openidc.new(config)
 
   local redirect_uri_path = config.redirect_uri_path
   
@@ -92,8 +143,6 @@ function _M.new(config)
 
   return self
 end
-
--- return _M
 
 local function token_auth_method_precondition(method, required_field)
   return function(opts)
@@ -112,12 +161,6 @@ local supported_token_auth_methods = {
   client_secret_jwt = token_auth_method_precondition('client_secret_jwt', 'client_secret')
 }
 
-
-
-local openidc = {
-  _VERSION = "1.7.2"
-}
-openidc.__index = openidc
 
 local function store_in_session(opts, feature)
   -- We don't have a whitelist of features to enable
