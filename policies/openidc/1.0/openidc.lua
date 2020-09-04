@@ -119,7 +119,7 @@ function openidc.new(config)
 --  return setmetatable({}, mt)
 -- end
 
-  local self = openidc.new(config)
+  local self = new()
 
   local redirect_uri_path = config.redirect_uri_path
   
