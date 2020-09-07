@@ -32,7 +32,7 @@
       "pass_cookies": {
     	"description": "",
 		"type": "string"
-	  },  
+	  }  
     }
   }
 }
