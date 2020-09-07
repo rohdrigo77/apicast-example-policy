@@ -12,6 +12,27 @@
   "version": "1.0",
   "configuration": {
     "type": "object",
-    "properties": { }
+    "properties": { 
+	  "redirect_uri_path": {
+	    "description": "",
+		"type": "string"
+	  },
+      "discovery": {
+        "description": "",
+		"type": "string"
+	  },
+      "client_id": {
+        "description": "",
+		"type": "string"
+	  },
+      "client_secret": {
+        "description": "",
+		"type": "string"
+	  },
+      "pass_cookies": {
+    	"description": "",
+		"type": "string"
+	  },  
+    }
   }
 }
