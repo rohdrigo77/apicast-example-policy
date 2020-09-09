@@ -119,9 +119,7 @@ function openidc.new(config)
 --  return setmetatable({}, mt)
 -- end
 
-  ngx.log
-
-  local self = new()
+  local self = new(config)
 
   local redirect_uri_path = config.redirect_uri_path
   
