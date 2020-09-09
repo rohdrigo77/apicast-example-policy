@@ -119,6 +119,8 @@ function openidc.new(config)
 --  return setmetatable({}, mt)
 -- end
 
+  ngx.log
+
   local self = new()
 
   local redirect_uri_path = config.redirect_uri_path
@@ -128,7 +130,8 @@ function openidc.new(config)
   self.client_secret = config.client_secret
   self.pass_cookies = config.pass_cookies
   
-
+  log(ERROR, "ERROR")
+  
   return self
 end
 
@@ -1804,6 +1807,9 @@ function openidc.set_logging(new_log, new_levels)
   WARN = new_levels.WARN and new_levels.WARN or ngx.WARN
 end
 
+
 return openidc
+
+
 
 
